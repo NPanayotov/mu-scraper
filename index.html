@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mu scraper</title>
+
+
 
 	<style type="text/css" media="screen">
 		body {
@@ -40,6 +42,26 @@
 		}
 
 		.table td:last-child img {
+			display: none;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.modal {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 10;
+			background: #fff;
+			padding: 30px;
+			border-radius: 5px;
+			transform: translate(-50%, -50%);
+			box-shadow: 0 0 0 200vw rgba(0,0,0, .5);
+		}
+
+		.modal.is-hidden {
 			display: none;
 		}
 	</style>
@@ -82,11 +104,30 @@
 				</tbody>
 			</table>
 		</div><!-- /.table -->
+
+		<audio class="js-sound hidden">
+		  <source src="https://www.myinstants.com/media/sounds/frankenosirisclassic_ability_4a.mp3" type="audio/mpeg">
+		</audio>
+
+		<div class="modal">
+			<h1>This tool is using scraping technology.<br />You shouldn't use it.</h1>
+
+			<a href="#" class="js-close">OK :)</a>
+		</div><!-- /.modal -->
 	</div><!-- /.shell -->
 
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io();
+
+		const closeModal = document.querySelector('.js-close');
+		const modal = document.querySelector('.modal');
+
+		closeModal.addEventListener('click', (evt) => {
+			modal.classList.add('is-hidden');
+
+			evt.preventDefault();
+		});
 
 		socket.on('scraped', function(data) {
 			const { bosses, golden } = data;
@@ -99,6 +140,21 @@
 
 			bossesContainer.innerHTML = bosses;
 			goldenContainer.innerHTML = golden;
+
+			const statusCells = document.querySelectorAll('table td:nth-child(2)');
+			const sound = document.querySelector('.js-sound');
+
+			for (const cell of statusCells) {
+				const cellText = cell.textContent;
+				const isAlive = cellText === 'Alive';
+
+				if (! isAlive) {
+					continue
+				};
+
+				sound.currentTime = 0;
+				sound.play();
+			}
 		});
 	</script>
 </body>
