@@ -119,6 +119,7 @@
 	<script>
 		const closeModal = document.querySelector('.js-close');
 		const modal = document.querySelector('.modal');
+		const sound = document.querySelector('.js-sound');
 
 		closeModal.addEventListener('click', (evt) => {
 			modal.classList.add('is-hidden');
@@ -168,7 +169,6 @@
 						goldenContainer.innerHTML = golden;
 
 						const statusCells = document.querySelectorAll('table td:nth-child(2)');
-						const sound = document.querySelector('.js-sound');
 						const currentStatus = [];
 
 						for (const cell of statusCells) {
