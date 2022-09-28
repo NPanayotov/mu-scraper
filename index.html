@@ -137,13 +137,15 @@
 					break;
 				}
 
-				const newAliveBosses = prevStatus.map(prevState => {
+				const newAliveBosses = prevStatus.filter(prevState => {
 					const { prevName, prevStatus } = prevState;
 					const hasChange = name === prevName && status !== prevStatus;
 
 
 					if ( hasChange && status ) {
-						return prevState;
+						return true;
+					} else {
+						else false;
 					}
 				});
 
