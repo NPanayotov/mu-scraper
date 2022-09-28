@@ -126,6 +126,15 @@
 			evt.preventDefault();
 		});
 
+		let prevStatus = [];
+
+		const playSound = (status) => {
+			// sound.currentTime = 0;
+			// sound.play();
+			//
+			console.log(status)
+		}
+
 		const fetchAndRenderData = () => {
 			fetch('/api/results').then((response) => response.json())
   				.then((data) => {
@@ -142,22 +151,21 @@
 
 						const statusCells = document.querySelectorAll('table td:nth-child(2)');
 						const sound = document.querySelector('.js-sound');
+						const currentStatus = [];
 
 						for (const cell of statusCells) {
 							const cellText = cell.textContent;
-							const isAlive = cellText === 'Alive' && !cell.classList.contains('has-alive');
+							const bossName = cell.previousElementSibling.textContent;
+							const isAlive = cellText === 'Alive';
 
-							if (! isAlive) {
-								cell.classList.remove('has-alive');
-
-								continue;
-							};
-
-							cell.classList.add('has-alive');
-
-							sound.currentTime = 0;
-							sound.play();
+							currentStatus.push({
+								name: bossName,
+								status: isAlive
+							});
 						}
+
+						playSound(currentStatus);
+						prevStatus = currentStatus;
 
 						setTimeout(() => {
 							fetchAndRenderData();
