@@ -132,6 +132,8 @@
 			for (const boss of statuses) {
 				const { name, status } = boss;
 
+				console.log(prevStatus)
+
 
 				if (! prevStatus.legnth) {
 					break;
@@ -140,6 +142,8 @@
 				const newAliveBosses = prevStatus.map(prevState => {
 					const { prevName, prevStatus } = prevState;
 					const hasChange = name === prevName && status !== prevStatus;
+
+					console.table(prevName. prevStatus, name, status)
 
 					if ( hasChange && status ) {
 						return true;
@@ -154,8 +158,7 @@
 				}
 			}
 
-
-			console.log(status)
+			console.log(statuses)
 		}
 
 		const fetchAndRenderData = () => {
