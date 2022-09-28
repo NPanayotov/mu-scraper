@@ -128,10 +128,33 @@
 
 		let prevStatus = [];
 
-		const playSound = (status) => {
-			// sound.currentTime = 0;
-			// sound.play();
-			//
+		const playSound = (statuses) => {
+			for (const boss of statuses) {
+				const { name, status } = boss;
+
+
+				if (! prevStatus.legnth) {
+					break;
+				}
+
+				const newAliveBosses = prevStatus.map(prevState => {
+					const { prevName, prevStatus } = prevState;
+					const hasChange = name === prevName && status !== prevStatus;
+
+					if ( hasChange && status ) {
+						return true;
+					}
+				});
+
+				console.log(newAliveBosses)
+
+				if (newAliveBosses) {
+					sound.currentTime = 0;
+					sound.play();
+				}
+			}
+
+
 			console.log(status)
 		}
 
