@@ -12,7 +12,7 @@ server.listen(3000, () => {
   console.log('listening on *:3000');
 });
 
-app.get('/results', (req, res) => {
+app.get('/api/results', (req, res) => {
 	async function scrape() {
 		const browser = await puppeteer.launch({})
 		const page = await browser.newPage();
