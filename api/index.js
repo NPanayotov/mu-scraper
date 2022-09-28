@@ -1,6 +1,8 @@
 const app = require('express')();
 const { v4 } = require('uuid');
 const puppeteer = require('puppeteer');
+import chromium from 'chrome-aws-lambda';
+
 
 app.get('/api', (req, res) => {
   const path = `/api/item/${v4()}`;
@@ -11,7 +13,13 @@ app.get('/api', (req, res) => {
 
 app.get('/api/results', (req, res) => {
   async function scrape() {
-		const browser = await puppeteer.launch({})
+		const browser = await chromium.puppeteer.launch({
+		    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+		    defaultViewport: chromium.defaultViewport,
+		    executablePath: await chromium.executablePath,
+		    headless: true,
+		    ignoreHTTPSErrors: true,
+		});
 		const page = await browser.newPage();
 		const scrapeData = {};
 

@@ -129,7 +129,7 @@
 		});
 
 		const fetchAndRenderData = () => {
-			fetch('/results').then((response) => response.json())
+			fetch('/api/results').then((response) => response.json())
   				.then((data) => {
   						const { bosses, golden } = data;
 
