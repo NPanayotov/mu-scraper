@@ -116,8 +116,6 @@
 		</div><!-- /.modal -->
 	</div><!-- /.shell -->
 
-	<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
-
 	<script>
 		const closeModal = document.querySelector('.js-close');
 		const modal = document.querySelector('.modal');
@@ -147,11 +145,15 @@
 
 						for (const cell of statusCells) {
 							const cellText = cell.textContent;
-							const isAlive = cellText === 'Alive';
+							const isAlive = cellText === 'Alive' && !cell.classList.contains('has-alive');
 
 							if (! isAlive) {
-								continue
+								cell.classList.remove('has-alive');
+
+								continue;
 							};
+
+							cell.classList.add('has-alive');
 
 							sound.currentTime = 0;
 							sound.play();
@@ -162,7 +164,6 @@
 						}, 30000);
   				});
 		}
-
 
 		fetchAndRenderData();
 
