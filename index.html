@@ -109,6 +109,12 @@
 		  <source src="https://www.myinstants.com/media/sounds/frankenosirisclassic_ability_4a.mp3" type="audio/mpeg">
 		</audio>
 
+		<audio class="js-sound-dead hidden">
+		  <source src="https://www.myinstants.com/media/sounds/mission-failed-well-get-em-next-time-sound-effect-zxhixnbk.mp3" type="audio/mpeg">
+		</audio>
+
+
+
 		<div class="modal">
 			<h1>This tool is using scraping technology.<br />You shouldn't use it.</h1>
 
@@ -119,7 +125,8 @@
 	<script>
 		const closeModal = document.querySelector('.js-close');
 		const modal = document.querySelector('.modal');
-		const sound = document.querySelector('.js-sound');
+		const aliveSound = document.querySelector('.js-sound');
+		const deadSound = document.querySelector('.js-sound-dead');
 
 		closeModal.addEventListener('click', (evt) => {
 			modal.classList.add('is-hidden');
@@ -151,7 +158,8 @@
 							return true;
 						}
 
-						return false;
+						deadSound.currentTime = 0;
+						deadSound.play();
 					}
 
 					return false;
@@ -160,8 +168,8 @@
 				console.log(newAliveBosses, prevStatus)
 
 				if (newAliveBosses.length > 0) {
-					sound.currentTime = 0;
-					sound.play();
+					aliveSound.currentTime = 0;
+					aliveSound.play();
 				}
 			}
 		}
