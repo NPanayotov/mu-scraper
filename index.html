@@ -144,8 +144,12 @@
 
 					if ( hasChange && status ) {
 						return true;
+					} else {
+						return false;
 					}
 				});
+
+				console.log(newAliveBosses, prevStatus)
 
 				if (newAliveBosses.length > 0) {
 					sound.currentTime = 0;
