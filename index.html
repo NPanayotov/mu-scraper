@@ -135,7 +135,7 @@
 				console.log(prevStatus)
 
 
-				if (! prevStatus.legnth) {
+				if (prevStatus.legnth < 1) {
 					break;
 				}
 
@@ -152,7 +152,7 @@
 
 				console.log(newAliveBosses)
 
-				if (newAliveBosses) {
+				if (newAliveBosses.length > 0) {
 					sound.currentTime = 0;
 					sound.play();
 				}
