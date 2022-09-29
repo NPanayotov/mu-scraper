@@ -76,6 +76,7 @@
 			padding: 5px;
 			min-width: 30px;
 			border-radius: 3px;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -160,13 +161,9 @@
 
 				if (countFrom === 0) {
 					clearInterval(countdown)
-
-					startCountdown(timerCount)
 				}
 			}, 1000);
 		}
-
-		startCountdown(timerCount)
 
 		closeModal.addEventListener('click', (evt) => {
 			modal.classList.add('is-hidden');
@@ -239,6 +236,8 @@
 
 						playSound(currentStatus);
 						prevStatus = currentStatus;
+
+						startCountdown(timerCount);
 
 						setTimeout(() => {
 							fetchAndRenderData();
