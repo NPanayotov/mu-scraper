@@ -164,6 +164,7 @@
 				countFrom--;
 
 				if (countFrom < 0) {
+					timer.textContent = 'Scraping...';
 					clearInterval(countdown)
 				}
 			}, 1000);
