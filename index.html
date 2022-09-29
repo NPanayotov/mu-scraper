@@ -144,13 +144,10 @@
 					break;
 				}
 
-				console.log(statuses)
-
 				const newAliveBosses = prevStatus.filter(prevState => {
-					const { prevName, prevStatus } = prevState;
+					const { name: prevName, status: prevStatus } = prevState;
 					const sameName = name === prevName;
 					const differentStatus = status !== prevStatus;
-
 
 
 					if ( sameName && differentStatus ) {
@@ -164,8 +161,6 @@
 
 					return false;
 				});
-
-				console.log(newAliveBosses, prevStatus)
 
 				if (newAliveBosses.length > 0) {
 					aliveSound.currentTime = 0;
