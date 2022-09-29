@@ -64,69 +64,109 @@
 		.modal.is-hidden {
 			display: none;
 		}
+
+		.timer {
+			text-align: right;
+			margin: 15px 0;
+		}
+
+		.timer span {
+			display: inline-block;
+			border: 1px solid #000;
+			padding: 5px;
+			min-width: 30px;
+			border-radius: 3px;
+		}
 	</style>
 </head>
 <body>
 
-	<div class="shell">
-		<div class="table">
-			<table>
-				<thead>
-					<tr>
-						<th>Boss</th>
+	<section class="section">
+		<div class="shell">
+			<h1>Mu scraper by Panayotov</h1>
 
-						<th>Boss respawn time:</th>
+			<p class="timer">
+				<span class="js-timer" data-count="30"></span>
+			</p><!-- /.js-timer -->
 
-						<th>Last Kill by:</th>
-					</tr>
-				</thead>
+			<div class="table">
+				<table>
+					<thead>
+						<tr>
+							<th>Boss</th>
 
-				<tbody class="js-bosses">
+							<th>Boss respawn time:</th>
 
-				</tbody>
-			</table>
-		</div><!-- /.table -->
+							<th>Last Kill by:</th>
+						</tr>
+					</thead>
 
-		<div class="table">
-			<table>
-				<thead>
-					<tr>
-						<th>Golden Monster:</th>
+					<tbody class="js-bosses">
 
-						<th>Monsters Alive:</th>
+					</tbody>
+				</table>
+			</div><!-- /.table -->
 
-						<th>Last Kill by:</th>
-					</tr>
-				</thead>
+			<div class="table">
+				<table>
+					<thead>
+						<tr>
+							<th>Golden Monster:</th>
 
-				<tbody class="js-golden">
+							<th>Monsters Alive:</th>
 
-				</tbody>
-			</table>
-		</div><!-- /.table -->
+							<th>Last Kill by:</th>
+						</tr>
+					</thead>
 
-		<audio class="js-sound hidden">
-		  <source src="https://www.myinstants.com/media/sounds/frankenosirisclassic_ability_4a.mp3" type="audio/mpeg">
-		</audio>
+					<tbody class="js-golden">
 
-		<audio class="js-sound-dead hidden">
-		  <source src="https://www.myinstants.com/media/sounds/mission-failed-well-get-em-next-time-sound-effect-zxhixnbk.mp3" type="audio/mpeg">
-		</audio>
+					</tbody>
+				</table>
+			</div><!-- /.table -->
+
+			<audio class="js-sound hidden">
+			  <source src="https://www.myinstants.com/media/sounds/frankenosirisclassic_ability_4a.mp3" type="audio/mpeg">
+			</audio>
+
+			<audio class="js-sound-dead hidden">
+			  <source src="https://www.myinstants.com/media/sounds/mission-failed-well-get-em-next-time-sound-effect-zxhixnbk.mp3" type="audio/mpeg">
+			</audio>
 
 
 
-		<div class="modal">
-			<h1>This tool is using scraping technology.<br />You shouldn't use it.</h1>
+			<div class="modal">
+				<h1>This tool is using scraping technology.<br />You shouldn't use it.</h1>
 
-			<a href="#" class="js-close">OK :)</a>
-		</div><!-- /.modal -->
-	</div><!-- /.shell -->
+				<a href="#" class="js-close">OK :)</a>
+			</div><!-- /.modal -->
+		</div><!-- /.shell -->
+	</section><!-- /.section -->
 
 	<script>
 		const closeModal = document.querySelector('.js-close');
 		const modal = document.querySelector('.modal');
 		const aliveSound = document.querySelector('.js-sound');
 		const deadSound = document.querySelector('.js-sound-dead');
+		const timer = document.querySelector('.js-timer');
+		const timerCount = parseInt(timer.dataset.count, 10);
+
+		const startCountdown = (countFrom) => {
+
+			const countdown = setInterval(() => {
+				timer.textContent = countFrom;
+
+				countFrom--;
+
+				if (countFrom === 0) {
+					clearInterval(countdown)
+
+					startCountdown(timerCount)
+				}
+			}, 1000);
+		}
+
+		startCountdown(timerCount)
 
 		closeModal.addEventListener('click', (evt) => {
 			modal.classList.add('is-hidden');
