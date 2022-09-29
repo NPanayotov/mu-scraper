@@ -65,6 +65,10 @@
 			display: none;
 		}
 
+		.section h1 {
+			text-align: center;
+		}
+
 		.timer {
 			text-align: right;
 			margin: 15px 0;
@@ -159,7 +163,7 @@
 
 				countFrom--;
 
-				if (countFrom === 0) {
+				if (countFrom < 0) {
 					clearInterval(countdown)
 				}
 			}, 1000);
